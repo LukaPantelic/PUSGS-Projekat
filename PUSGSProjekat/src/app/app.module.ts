@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { IncidentBrowserComponent } from './incident-browser/incident-browser.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NotificationAllComponent } from './notification/notification-all/notifi
     ProfileComponent,
     IncidentBrowserComponent,
     NotificationComponent,
-    NotificationAllComponent
+    NotificationAllComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

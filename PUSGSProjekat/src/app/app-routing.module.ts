@@ -6,12 +6,19 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UnregisterGuard } from './guards/unregister.guard';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]}
+  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]},
+  {path: 'notifications', component: NotificationComponent, children: [
+    {path: 'notifications-all', component: NotificationAllComponent},
+  ]},
+
 ];
 
 @NgModule({
