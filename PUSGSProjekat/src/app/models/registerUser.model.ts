@@ -1,7 +1,7 @@
 export class RegisterUser{
     Username! : string;
     Email! : string;
-    Passwort! : string;
+    Password! : string;
     FullName! : string;
     DOB! : Date;
     Street! : string;

@@ -5,10 +5,13 @@ import { IncidentBrowserComponent } from './incident-browser/incident-browser.co
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UnregisterGuard } from './guards/unregister.guard';
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]}
 ];
 
 @NgModule({
