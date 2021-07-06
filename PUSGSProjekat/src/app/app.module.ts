@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IncidentBrowserComponent } from './incident-browser/incident-browser.component';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { IncidentBrowserComponent } from './incident-browser/incident-browser.co
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    IncidentBrowserComponent
+    IncidentBrowserComponent,
+    NotificationComponent,
+    NotificationAllComponent
   ],
   imports: [
     BrowserModule,
