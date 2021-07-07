@@ -1,0 +1,107 @@
+﻿@model IEnumerable<WebApp.Models.Incident>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Confirmed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ETA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ATA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ETR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AffectedCustomers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voltage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduledTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cause)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subcause)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConstructionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Confirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ETA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ATA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ETR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AffectedCustomers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voltage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduledTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cause)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subcause)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstructionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
