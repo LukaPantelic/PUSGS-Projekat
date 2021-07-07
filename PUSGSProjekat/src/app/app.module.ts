@@ -30,7 +30,7 @@ import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety
 import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
 import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
 import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
-import { BasicInformationComponent } from './incident-new/basic-information/basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-new/basic-information/basic-information.component';
 import { IncidentNewComponent } from './incident-new/incident-new.component';
 import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
 import { IncidentCrewComponent } from './incident-new/incident-crew/incident-crew.component';
@@ -38,6 +38,11 @@ import { IncidentDevicesComponent } from './incident-new/incident-devices/incide
 import { IncidentEquipmentComponent } from './incident-new/incident-equipment/incident-equipment.component';
 import { IncidentMultimediaComponent } from './incident-new/incident-multimedia/incident-multimedia.component';
 import { IncidentResolutionComponent } from './incident-new/incident-resolution/incident-resolution.component';
+import { SwitchingPlansBasicInfoComponent } from './switching-plans-new/switching-plans-basic-info/switching-plans-basic-info.component';
+import { SwitchingPlansChecklistComponent } from './switching-plans-new/switching-plans-checklist/switching-plans-checklist.component';
+import { SwitchingPlansEquipmentComponent } from './switching-plans-new/switching-plans-equipment/switching-plans-equipment.component';
+import { SwitchingPlansHistoryComponent } from './switching-plans-new/switching-plans-history/switching-plans-history.component';
+import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switching-plans-multimedia/switching-plans-multimedia.component';
 
 @NgModule({
   declarations: [
@@ -63,14 +68,19 @@ import { IncidentResolutionComponent } from './incident-new/incident-resolution/
     SafetyDocumentsEquipmentComponent,
     SafetyDocumentsHistoryComponent,
     SafetyDocumentsMultimediaComponent,
-    BasicInformationComponent,
+    IncidentBasicInfoComponent,
     IncidentNewComponent,
     IncidentCallsComponent,
     IncidentCrewComponent,
     IncidentDevicesComponent,
     IncidentEquipmentComponent,
     IncidentMultimediaComponent,
-    IncidentResolutionComponent
+    IncidentResolutionComponent,
+    SwitchingPlansBasicInfoComponent,
+    SwitchingPlansChecklistComponent,
+    SwitchingPlansEquipmentComponent,
+    SwitchingPlansHistoryComponent,
+    SwitchingPlansMultimediaComponent
   ],
   imports: [
     HttpClientModule,
