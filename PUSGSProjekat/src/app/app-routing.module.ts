@@ -51,6 +51,7 @@ const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]},
+  { path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   { path: 'calls', component: CallsComponent, canActivate: [UnregisterGuard]},
   { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisterGuard]},
