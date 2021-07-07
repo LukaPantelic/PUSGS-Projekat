@@ -18,6 +18,13 @@ import { UnregisterGuard } from './guards/unregister.guard';
 import { WorkerGuard } from './guards/worker.guard';
 import { AuthInterceptor } from './authInterceptor';
 import { AddConsumerComponent } from './add-consumer/add-consumer.component';
+import { AddDeviceComponent } from './add-device/add-device.component';
+import { AddNewDeviceComponent } from './add-new-device/add-new-device.component';
+import { AddTeamsComponent } from './add-teams/add-teams.component';
+import { SafetyDocumentsComponent } from './safety-documents/safety-documents.component';
+import { SafetyDocumentsAddComponent } from './safety-documents-add/safety-documents-add.component';
+import { SwitchingPlansComponent } from './switching-plans/switching-plans.component';
+import { SwitchingPlansNewComponent } from './switching-plans-new/switching-plans-new.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +37,14 @@ import { AddConsumerComponent } from './add-consumer/add-consumer.component';
     NotificationComponent,
     NotificationAllComponent,
     SidebarComponent,
-    AddConsumerComponent
+    AddConsumerComponent,
+    AddDeviceComponent,
+    AddNewDeviceComponent,
+    AddTeamsComponent,
+    SafetyDocumentsComponent,
+    SafetyDocumentsAddComponent,
+    SwitchingPlansComponent,
+    SwitchingPlansNewComponent
   ],
   imports: [
     HttpClientModule,
