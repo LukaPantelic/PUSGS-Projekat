@@ -85,6 +85,16 @@ import { SwitchingPlansChecklistComponent } from './switching-plans-new/switchin
 import { SwitchingPlansEquipmentComponent } from './switching-plans-new/switching-plans-equipment/switching-plans-equipment.component';
 import { SwitchingPlansHistoryComponent } from './switching-plans-new/switching-plans-history/switching-plans-history.component';
 import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switching-plans-multimedia/switching-plans-multimedia.component';
+import { CallsComponent } from './calls/calls.component';
+import { DeviceModalComponent } from './device-modal/device-modal.component';
+import { MapComponent } from './map/map.component';
+import { AddTeamComponent } from './teams/teams.component';
+import { WorkRequestsComponent } from './work-requests/work-requests.component';
+import { WorkRequestsNewComponent } from './work-requests-new/work-requests-new.component';
+import { WorkRequestsBasicInfoComponent } from './work-requests-new/work-requests-basic-info/work-requests-basic-info.component';
+import { WorkRequestsEquipmentComponent } from './work-requests-new/work-requests-equipment/work-requests-equipment.component';
+import { WorkRequestsHistoryComponent } from './work-requests-new/work-requests-history/work-requests-history.component';
+import { WorkRequestsMultimediaComponent } from './work-requests-new/work-requests-multimedia/work-requests-multimedia.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +132,17 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     SwitchingPlansChecklistComponent,
     SwitchingPlansEquipmentComponent,
     SwitchingPlansHistoryComponent,
-    SwitchingPlansMultimediaComponent
+    SwitchingPlansMultimediaComponent,
+    CallsComponent,
+    DeviceModalComponent,
+    MapComponent,
+    AddTeamComponent,
+    WorkRequestsComponent,
+    WorkRequestsNewComponent,
+    WorkRequestsBasicInfoComponent,
+    WorkRequestsEquipmentComponent,
+    WorkRequestsHistoryComponent,
+    WorkRequestsMultimediaComponent
   ],
   imports: [
     HttpClientModule,
@@ -219,7 +239,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     WorkerGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
-  //entryComponents: [DeviceModalComponent],
+  entryComponents: [DeviceModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
