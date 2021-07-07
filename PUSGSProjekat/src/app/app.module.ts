@@ -37,6 +37,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChartsModule } from 'ng2-charts';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -124,7 +127,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -163,7 +166,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     MatSortModule,
     MatFormFieldModule,
     ChartsModule,
-    DragDropModule,
+   //DragDropModule,
     ToastrModule.forRoot(),
 
   ],
