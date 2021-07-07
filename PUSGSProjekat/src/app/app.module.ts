@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
@@ -127,7 +130,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    //BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -166,7 +169,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
     MatSortModule,
     MatFormFieldModule,
     ChartsModule,
-   //DragDropModule,
+    DragDropModule,
     ToastrModule.forRoot(),
 
   ],
