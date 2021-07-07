@@ -15,6 +15,11 @@ import { AddNewDeviceComponent } from './add-new-device/add-new-device.component
 import { AddTeamsComponent } from './add-teams/add-teams.component';
 import { SafetyDocumentsComponent } from './safety-documents/safety-documents.component';
 import { SafetyDocumentsAddComponent } from './safety-documents-add/safety-documents-add.component';
+import { SafetyDocumentsBasicInfoComponent } from './safety-documents-add/safety-documents-basic-info/safety-documents-basic-info.component';
+import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
+import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
+import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
+import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety-documents-checklist/safety-documents-checklist.component';
 import { SwitchingPlansComponent } from './switching-plans/switching-plans.component';
 import { SwitchingPlansNewComponent } from './switching-plans-new/switching-plans-new.component';
 
@@ -29,7 +34,13 @@ const routes: Routes = [
     {path: 'notifications-all', component: NotificationAllComponent},
   ]},
   { path: 'safety-documents', component: SafetyDocumentsComponent},
-  { path: 'safety-documents-add', component: SafetyDocumentsAddComponent},
+  { path: 'safety-documents-add', component: SafetyDocumentsAddComponent, children: [
+    { path: 'safety-documents-basic-info', component: SafetyDocumentsBasicInfoComponent},
+    { path: 'safety-documents-history', component: SafetyDocumentsHistoryComponent},
+    { path: 'safety-documents-multimedia', component: SafetyDocumentsMultimediaComponent},
+    { path: 'safety-documents-equipment', component: SafetyDocumentsEquipmentComponent},
+    { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
+  ]},
 ];
 
 @NgModule({
