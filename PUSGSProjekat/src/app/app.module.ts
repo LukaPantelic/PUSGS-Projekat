@@ -30,6 +30,14 @@ import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety
 import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
 import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
 import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
+import { BasicInformationComponent } from './incident-new/basic-information/basic-information.component';
+import { IncidentNewComponent } from './incident-new/incident-new.component';
+import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
+import { IncidentCrewComponent } from './incident-new/incident-crew/incident-crew.component';
+import { IncidentDevicesComponent } from './incident-new/incident-devices/incident-devices.component';
+import { IncidentEquipmentComponent } from './incident-new/incident-equipment/incident-equipment.component';
+import { IncidentMultimediaComponent } from './incident-new/incident-multimedia/incident-multimedia.component';
+import { IncidentResolutionComponent } from './incident-new/incident-resolution/incident-resolution.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +62,15 @@ import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safet
     SafetyDocumentsChecklistComponent,
     SafetyDocumentsEquipmentComponent,
     SafetyDocumentsHistoryComponent,
-    SafetyDocumentsMultimediaComponent
+    SafetyDocumentsMultimediaComponent,
+    BasicInformationComponent,
+    IncidentNewComponent,
+    IncidentCallsComponent,
+    IncidentCrewComponent,
+    IncidentDevicesComponent,
+    IncidentEquipmentComponent,
+    IncidentMultimediaComponent,
+    IncidentResolutionComponent
   ],
   imports: [
     HttpClientModule,
