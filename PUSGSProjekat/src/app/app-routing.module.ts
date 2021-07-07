@@ -33,6 +33,7 @@ import { SwitchingPlansComponent } from './switching-plans/switching-plans.compo
 import { SwitchingPlansNewComponent } from './switching-plans-new/switching-plans-new.component';
 
 
+
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
