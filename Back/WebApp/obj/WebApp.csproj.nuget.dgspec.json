@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[3.7.0.26, )"
             },
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.AspNet.WebApi.Core": {
               "target": "Package",
               "version": "[5.2.7, )"
@@ -92,6 +96,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "System.Data.Entity.Repository": {
+              "target": "Package",
+              "version": "[2.0.0.1, )"
             }
           },
           "imports": [
