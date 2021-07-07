@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,11 @@ import { IncidentBrowserComponent } from './incident-browser/incident-browser.co
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UnregisterGuard } from './guards/unregister.guard';
+import { WorkerGuard } from './guards/worker.guard';
+import { AuthInterceptor } from './authInterceptor';
 
 @NgModule({
   declarations: [
@@ -25,10 +31,19 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SidebarComponent
   ],
   imports: [
+    HttpClientModule,
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+
   ],
-  providers: [],
+  providers: [
+    UnregisterGuard,
+    WorkerGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
