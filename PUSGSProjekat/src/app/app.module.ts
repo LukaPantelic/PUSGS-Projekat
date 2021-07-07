@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnregisterGuard } from './guards/unregister.guard';
 import { WorkerGuard } from './guards/worker.guard';
 import { AuthInterceptor } from './authInterceptor';
+import { AddConsumerComponent } from './add-consumer/add-consumer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthInterceptor } from './authInterceptor';
     IncidentBrowserComponent,
     NotificationComponent,
     NotificationAllComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddConsumerComponent
   ],
   imports: [
     HttpClientModule,
