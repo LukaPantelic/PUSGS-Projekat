@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "chart.js": "^3.4.1",
-    "ngx-toastr": "^14.0.0"
-  }
-}
