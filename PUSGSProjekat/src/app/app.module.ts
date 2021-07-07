@@ -25,6 +25,11 @@ import { SafetyDocumentsComponent } from './safety-documents/safety-documents.co
 import { SafetyDocumentsAddComponent } from './safety-documents-add/safety-documents-add.component';
 import { SwitchingPlansComponent } from './switching-plans/switching-plans.component';
 import { SwitchingPlansNewComponent } from './switching-plans-new/switching-plans-new.component';
+import { SafetyDocumentsBasicInfoComponent } from './safety-documents-add/safety-documents-basic-info/safety-documents-basic-info.component';
+import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety-documents-checklist/safety-documents-checklist.component';
+import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
+import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
+import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,12 @@ import { SwitchingPlansNewComponent } from './switching-plans-new/switching-plan
     SafetyDocumentsComponent,
     SafetyDocumentsAddComponent,
     SwitchingPlansComponent,
-    SwitchingPlansNewComponent
+    SwitchingPlansNewComponent,
+    SafetyDocumentsBasicInfoComponent,
+    SafetyDocumentsChecklistComponent,
+    SafetyDocumentsEquipmentComponent,
+    SafetyDocumentsHistoryComponent,
+    SafetyDocumentsMultimediaComponent
   ],
   imports: [
     HttpClientModule,
