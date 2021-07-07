@@ -1,153 +1,118 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace WebApp.Controllers
 {
-    public class IncidentsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class IncidentsController : ControllerBase
     {
-        private readonly DataDBContext _context;
-
-        public IncidentsController(DataDBContext context)
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> manager;
+        public IncidentsController(UserManager<User> u, DataDBContext d, AuthenticationDBContext a)
         {
-            _context = context;
+            data = d;
+            auth = a;
+            manager = u;
         }
 
-        // GET: Incidents
-        public async Task<IActionResult> Index()
+        // GET: api/Incidents
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Incident>>> GetIncidents()
         {
-            return View(await _context.Incidents.ToListAsync());
+            return await data.Incidents.ToListAsync();
         }
 
-        // GET: Incidents/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Incidents/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Incident>> GetIncident(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var incident = await data.Incidents.FindAsync(id);
 
-            var incident = await _context.Incidents
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (incident == null)
             {
                 return NotFound();
             }
 
-            return View(incident);
+            return incident;
         }
 
-        // GET: Incidents/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Incidents/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Confirmed,Status,ETA,ATA,ETR,AffectedCustomers,Voltage,ScheduledTime,Cause,Subcause,ConstructionType,Material")] Incident incident)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(incident);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(incident);
-        }
-
-        // GET: Incidents/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var incident = await _context.Incidents.FindAsync(id);
-            if (incident == null)
-            {
-                return NotFound();
-            }
-            return View(incident);
-        }
-
-        // POST: Incidents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Confirmed,Status,ETA,ATA,ETR,AffectedCustomers,Voltage,ScheduledTime,Cause,Subcause,ConstructionType,Material")] Incident incident)
+        // PUT: api/Incidents/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutIncident(int id, Incident incident)
         {
             if (id != incident.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            data.Entry(incident).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(incident);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IncidentExists(incident.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await data.SaveChangesAsync();
             }
-            return View(incident);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!IncidentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Incidents/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Incidents
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Incident>> PostIncident(Incident incident)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            data.Incidents.Add(incident);
+            await data.SaveChangesAsync();
 
-            var incident = await _context.Incidents
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return CreatedAtAction("GetIncident", new { id = incident.Id }, incident);
+        }
+
+        // DELETE: api/Incidents/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteIncident(int id)
+        {
+            var incident = await data.Incidents.FindAsync(id);
             if (incident == null)
             {
                 return NotFound();
             }
 
-            return View(incident);
-        }
+            data.Incidents.Remove(incident);
+            await data.SaveChangesAsync();
 
-        // POST: Incidents/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var incident = await _context.Incidents.FindAsync(id);
-            _context.Incidents.Remove(incident);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
 
         private bool IncidentExists(int id)
         {
-            return _context.Incidents.Any(e => e.Id == id);
+            return data.Incidents.Any(e => e.Id == id);
         }
     }
 }

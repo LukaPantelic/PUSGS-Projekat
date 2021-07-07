@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QfSHBa0mribdnXoT+dn1cdrVSfgv8AwNYBq9EMLrJ4QQizuZttPXTw/A+BeyATFaMVUPiag8hFf6vY9b8fFkig==",
+  "dgSpecHash": "7z5anBrUlPutS+JnItwOkGHsZnIDHCBV7b4TrS23NpGOYlfl3WY+3o7mJs0Ea7spyktLm8AspRiaFKdeTywt7w==",
   "success": true,
   "projectFilePath": "C:\\Users\\laptop\\Desktop\\web2\\PUSGS-Projekat\\Back\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
@@ -12,10 +12,12 @@
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.6\\microsoft.aspnetcore.authentication.google.5.0.6.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.6\\microsoft.aspnetcore.authentication.jwtbearer.5.0.6.nupkg.sha512",
+    "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.7\\microsoft.aspnetcore.authorization.5.0.7.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.6\\microsoft.aspnetcore.cryptography.internal.5.0.6.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.6\\microsoft.aspnetcore.cryptography.keyderivation.5.0.6.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.6\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.6.nupkg.sha512",
+    "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.metadata\\5.0.7\\microsoft.aspnetcore.metadata.5.0.7.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\5.0.0\\microsoft.aspnetcore.razor.language.5.0.0.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",

@@ -1,153 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace WebApp.Controllers
 {
-    public class DevicesController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class DevicesController : ControllerBase
     {
-        private readonly DataDBContext _context;
-
-        public DevicesController(DataDBContext context)
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> manager;
+        public DevicesController(UserManager<User> u, DataDBContext d, AuthenticationDBContext a)
         {
-            _context = context;
+            data = d;
+            auth = a;
+            manager = u;
         }
 
-        // GET: Devices
-        public async Task<IActionResult> Index()
+        // GET: api/Devices
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
-            return View(await _context.Devices.ToListAsync());
+            return await data.Devices.ToListAsync();
         }
 
-        // GET: Devices/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Devices/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Device>> GetDevice(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var device = await data.Devices.FindAsync(id);
 
-            var device = await _context.Devices
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (device == null)
             {
                 return NotFound();
             }
 
-            return View(device);
+            return device;
         }
 
-        // GET: Devices/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Devices/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Name,CoordX,CoordY")] Device device)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(device);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(device);
-        }
-
-        // GET: Devices/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var device = await _context.Devices.FindAsync(id);
-            if (device == null)
-            {
-                return NotFound();
-            }
-            return View(device);
-        }
-
-        // POST: Devices/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Name,CoordX,CoordY")] Device device)
+        // PUT: api/Devices/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutDevice(int id, Device device)
         {
             if (id != device.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            //data.Entry(device).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(device);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DeviceExists(device.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await data.SaveChangesAsync();
             }
-            return View(device);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DeviceExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Devices/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Devices
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Device>> PostDevice(Device device)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            data.Devices.Add(device);
+            await data.SaveChangesAsync();
 
-            var device = await _context.Devices
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return CreatedAtAction("GetDevice", new { id = device.Id }, device);
+        }
+
+        // DELETE: api/Devices/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDevice(int id)
+        {
+            var device = await data.Devices.FindAsync(id);
             if (device == null)
             {
                 return NotFound();
             }
 
-            return View(device);
-        }
+            data.Devices.Remove(device);
+            await data.SaveChangesAsync();
 
-        // POST: Devices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var device = await _context.Devices.FindAsync(id);
-            _context.Devices.Remove(device);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
 
         private bool DeviceExists(int id)
         {
-            return _context.Devices.Any(e => e.Id == id);
+            return data.Devices.Any(e => e.Id == id);
         }
     }
 }

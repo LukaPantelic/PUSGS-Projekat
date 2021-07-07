@@ -1,86 +1,96 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using WebApp.DTOs;
+using WebApp.Models;
+using WebApp.Repository;
 
 namespace WebApp.Controllers
 {
-    public class AuthController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
     {
-        // GET: AuthController
-        public ActionResult Index()
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> _userManager;
+        private ApplicationSettings _appSettings;
+
+        public AuthController(UserManager<User> userManager, IOptions<ApplicationSettings> appSettings, DataDBContext d, AuthenticationDBContext a)
         {
-            return View();
+            _userManager = userManager;
+            _appSettings = appSettings.Value;
+            data = d;
+            auth = a;
         }
 
-        // GET: AuthController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: AuthController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AuthController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [Route("Login")]
+        // POST: api/<controller>/Login
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO login)
         {
+            User user = await _userManager.FindByNameAsync(login.Username);
+            if (user != null && await _userManager.CheckPasswordAsync(user, login.Password))
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("UserID", user.Id.ToString()),
+                        new Claim("Role", user.Role),
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                return Ok(new { token, role = user.Role, name = user.FullName, userId = user.Id.ToString() });
+            }
+            else
+                return BadRequest(new { message = "Username or password is incorrect." });
+        }
+
+        // POST: api/<controller>
+        [HttpPost]
+        [Route("Register")]
+        public async Task<Object> Post([FromBody] UserDTO model)
+        {
+            User applicationUser = new User()
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                FullName = model.FullName,
+                DOB = model.DOB,
+                Role = model.Role,
+                CrewID = model.CrewID,
+                StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.Street)).Id
+            };
             try
             {
-                return RedirectToAction(nameof(Index));
+                var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                if (result.Errors.Any())
+                {
+                    var test = result.Errors.ToList();
+                    return BadRequest(new { message = test[0].Description });
+                }
+                return Ok();
             }
-            catch
+            catch (Exception e)
             {
-                return View();
-            }
-        }
-
-        // GET: AuthController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AuthController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AuthController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AuthController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                throw e;
             }
         }
     }

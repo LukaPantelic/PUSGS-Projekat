@@ -2,152 +2,115 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using WebApp.Models;
 using WebApp.Repository;
 
 namespace WebApp.Controllers
 {
-    public class CallsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CallsController : ControllerBase
     {
-        private readonly DataDBContext _context;
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> _userManager;
+        private ApplicationSettings _appSettings;
 
-        public CallsController(DataDBContext context)
+        public CallsController(UserManager<User> userManager, IOptions<ApplicationSettings> appSettings, DataDBContext d, AuthenticationDBContext a)
         {
-            _context = context;
+            _userManager = userManager;
+            _appSettings = appSettings.Value;
+            data = d;
+            auth = a;
         }
 
-        // GET: Calls
-        public async Task<IActionResult> Index()
+        // GET: api/Calls
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Call>>> GetCalls()
         {
-            return View(await _context.Calls.ToListAsync());
+            return await data.Calls.ToListAsync();
         }
 
-        // GET: Calls/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Calls/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Call>> GetCall(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var call = await data.Calls.FindAsync(id);
 
-            var call = await _context.Calls
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (call == null)
             {
                 return NotFound();
             }
 
-            return View(call);
+            return call;
         }
 
-        // GET: Calls/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Calls/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Reason,Comment,Hazard,UserID")] Call call)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(call);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(call);
-        }
-
-        // GET: Calls/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var call = await _context.Calls.FindAsync(id);
-            if (call == null)
-            {
-                return NotFound();
-            }
-            return View(call);
-        }
-
-        // POST: Calls/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Reason,Comment,Hazard,UserID")] Call call)
+        // PUT: api/Calls/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCall(int id, Call call)
         {
             if (id != call.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            data.Entry(call).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(call);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CallExists(call.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await data.SaveChangesAsync();
             }
-            return View(call);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CallExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Calls/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Calls
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Call>> PostCall(Call call)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            data.Calls.Add(call);
+            await data.SaveChangesAsync();
 
-            var call = await _context.Calls
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return CreatedAtAction("GetCall", new { id = call.Id }, call);
+        }
+
+        // DELETE: api/Calls/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCall(int id)
+        {
+            var call = await data.Calls.FindAsync(id);
             if (call == null)
             {
                 return NotFound();
             }
 
-            return View(call);
-        }
+            data.Calls.Remove(call);
+            await data.SaveChangesAsync();
 
-        // POST: Calls/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var call = await _context.Calls.FindAsync(id);
-            _context.Calls.Remove(call);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
 
         private bool CallExists(int id)
         {
-            return _context.Calls.Any(e => e.Id == id);
+            return data.Calls.Any(e => e.Id == id);
         }
     }
 }

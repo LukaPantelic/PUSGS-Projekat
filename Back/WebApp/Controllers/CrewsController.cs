@@ -1,153 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace WebApp.Controllers
 {
-    public class CrewsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class CrewsController : ControllerBase
     {
-        private readonly DataDBContext _context;
-
-        public CrewsController(DataDBContext context)
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> manager;
+        public CrewsController(UserManager<User> u, DataDBContext d, AuthenticationDBContext a)
         {
-            _context = context;
+            data = d;
+            auth = a;
+            manager = u;
         }
 
-        // GET: Crews
-        public async Task<IActionResult> Index()
+        // GET: api/Crews
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Crew>>> GetCrews()
         {
-            return View(await _context.Crews.ToListAsync());
+            return await data.Crews.ToListAsync();
         }
 
-        // GET: Crews/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Crews/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Crew>> GetCrew(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var crew = await data.Crews.FindAsync(id);
 
-            var crew = await _context.Crews
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (crew == null)
             {
                 return NotFound();
             }
 
-            return View(crew);
+            return crew;
         }
 
-        // GET: Crews/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Crews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Crew crew)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(crew);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(crew);
-        }
-
-        // GET: Crews/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var crew = await _context.Crews.FindAsync(id);
-            if (crew == null)
-            {
-                return NotFound();
-            }
-            return View(crew);
-        }
-
-        // POST: Crews/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Crew crew)
+        // PUT: api/Crews/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCrew(int id, Crew crew)
         {
             if (id != crew.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            //data.Entry(crew).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(crew);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CrewExists(crew.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await data.SaveChangesAsync();
             }
-            return View(crew);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CrewExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Crews/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Crews
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Crew>> PostCrew(Crew crew)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            data.Crews.Add(crew);
+            await data.SaveChangesAsync();
 
-            var crew = await _context.Crews
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return CreatedAtAction("GetCrew", new { id = crew.Id }, crew);
+        }
+
+        // DELETE: api/Crews/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCrew(int id)
+        {
+            var crew = await data.Crews.FindAsync(id);
             if (crew == null)
             {
                 return NotFound();
             }
 
-            return View(crew);
-        }
+            data.Crews.Remove(crew);
+            await data.SaveChangesAsync();
 
-        // POST: Crews/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var crew = await _context.Crews.FindAsync(id);
-            _context.Crews.Remove(crew);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
 
         private bool CrewExists(int id)
         {
-            return _context.Crews.Any(e => e.Id == id);
+            return data.Crews.Any(e => e.Id == id);
         }
     }
 }
