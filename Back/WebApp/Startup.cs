@@ -34,15 +34,15 @@ namespace WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AuthenticationDBContext db, DataDBContext dbase)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, AuthenticationDBContext db, DataDBContext dbase*/)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            db.Database.EnsureCreated();
-            dbase.Database.EnsureCreated();
+          //  db.Database.EnsureCreated();
+          //  dbase.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 
