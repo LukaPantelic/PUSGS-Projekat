@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -92,6 +94,26 @@ namespace WebApp.Controllers
             {
                 throw e;
             }
+        }
+
+        [HttpGet]
+        [Route("GetProfile")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> GetProfile()
+        {
+            User temp = await _userManager.FindByIdAsync(User.Claims.First(x => x.Type == "UserID").Value);
+            UserDTO retval = new UserDTO()
+            {
+                FullName = temp.FullName,
+                Username = temp.UserName,
+                Role = temp.Role,
+                Email = temp.Email,
+                CrewID = temp.CrewID,
+                Street = (await data.Streets.FirstOrDefaultAsync(x => x.Id == temp.StreetID)).Name,
+                DOB = temp.DOB,
+
+            };
+            return Ok(new { retval });
         }
     }
 }
