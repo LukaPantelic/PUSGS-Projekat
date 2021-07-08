@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
@@ -30,9 +31,44 @@ namespace WebApp.Controllers
 
         // GET: api/<DevicesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ICollection<DeviceDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<DeviceDTO> list = new List<DeviceDTO>();
+            foreach (Device d in data.Devices)
+            {
+                list.Add(new DeviceDTO() { Name = d.Name, Street = d.Street.Name, Type = d.Type });
+            }
+            return list;
+        }
+
+        [HttpGet("{type}")]
+        public IActionResult Get(string type)
+        {
+
+            Device temp = data.Devices.OrderByDescending(u => u.Id).FirstOrDefault(x => x.Type == type);
+            int id = 1;
+            if (temp != null)
+            {
+                string y = temp.Name.Substring(3, 1);
+                id = Int32.Parse(y) + 1;
+            }
+            string retval = (type.Substring(0, 3)).ToUpper() + id.ToString();
+            return Ok(new { newId = retval });
+        }
+
+        [HttpGet]
+        [Route("GetDeviceByName/{name}")]
+        public IActionResult GetDeviceByName(string name)
+        {
+            Device temp = data.Devices.FirstOrDefault(x => x.Name == name);
+            if (temp != null)
+            {
+                return Ok(new { retval = new DeviceDTO() { Name = temp.Name, Street = temp.Street.Name, Type = temp.Type } });
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // GET api/<DevicesController>/5
