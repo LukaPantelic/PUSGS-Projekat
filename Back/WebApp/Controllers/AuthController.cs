@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -144,5 +146,62 @@ namespace WebApp.Controllers
             }
             return Ok(new { msg = "ok" });
         }
+
+        [HttpPost]
+        [Route("SocialLogin")]
+        // POST: api/<controller>/Login
+        public async Task<IActionResult> SocialLogin([FromBody] UserLoginDTO loginModel)
+        {
+            var test = _appSettings.JWT_Secret;
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Expires = DateTime.UtcNow.AddMinutes(5),
+                //Key min: 16 characters
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.WriteToken(securityToken);
+            return Ok(new { token });
+
+        }
+
+        [HttpGet]
+        [Route("SignInWithGoogle")]
+        public IActionResult SignInWithGoogle()
+        {
+            return new ChallengeResult(
+            GoogleDefaults.AuthenticationScheme,
+            new AuthenticationProperties
+            {
+                RedirectUri = Url.Action(nameof(HandleExternalLogin))
+            });
+        }
+
+        public async Task<IActionResult> HandleExternalLogin()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync("Identity.External");
+
+            if (!authenticateResult.Succeeded)
+                return BadRequest(); 
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                  {
+                        new Claim("Roles", "admin")//admin vrv treba da bude regular user za social login
+                  }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1234567812345678")), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.WriteToken(securityToken);
+
+            HttpContext.Response.Cookies.Append("jwt", token);
+
+            return Redirect("http://localhost:4200/home");
+        }
+
     }
 }
