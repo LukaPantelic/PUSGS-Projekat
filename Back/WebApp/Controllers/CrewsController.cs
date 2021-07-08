@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
@@ -30,9 +31,44 @@ namespace WebApp.Controllers
 
         // GET: api/<CrewsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            List<CrewDTO> list = new List<CrewDTO>();
+            foreach (Crew c in data.Crews)
+            {
+                list.Add(new CrewDTO() { Id = c.Id, Name = c.Name });
+            }
+            return Ok(new { list });
+        }
+
+        [HttpGet]
+        [Route("GetFreeCrewmates")]
+        public IActionResult GetFreeCrewmates()
+        {
+            List<UserDTO> list = new List<UserDTO>();
+            foreach (User u in auth.Users)
+            {
+                if (u.Role == "Crew Member" && u.CrewID == -1)
+                {
+                    list.Add(new UserDTO() { FullName = u.FullName, Username = u.UserName });
+                }
+            }
+            return Ok(new { list });
+        }
+
+        [HttpGet]
+        [Route("GetCrewmates/{id}")]
+        public IActionResult GetCrewmates(int id)
+        {
+            List<UserDTO> list = new List<UserDTO>();
+            foreach (User u in auth.Users)
+            {
+                if (u.CrewID == id)
+                {
+                    list.Add(new UserDTO() { Username = u.UserName, FullName = u.FullName });
+                }
+            }
+            return Ok(new { list });
         }
 
         // GET api/<CrewsController>/5
