@@ -80,9 +80,29 @@ namespace WebApp.Controllers
 
         // POST api/<CrewsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CrewDTO body)
         {
+            if (data.Crews.FirstOrDefault(x => x.Name == body.Name) == null)
+            {
+                Crew c = new Crew()
+                {
+                    Name = body.Name
+                };
+                data.Crews.Add(c);
+                await data.SaveChangesAsync();
+                foreach (string s in body.List)
+                {
+                    auth.Users.FirstOrDefault(x => x.UserName == s).CrewID = data.Crews.FirstOrDefault(x => x.Name == body.Name).Id;
+                }
+                await auth.SaveChangesAsync();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
+
 
         // PUT api/<CrewsController>/5
         [HttpPut("{id}")]
