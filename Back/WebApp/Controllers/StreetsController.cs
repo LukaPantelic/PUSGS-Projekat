@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Models;
+using WebApp.Repository;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +15,16 @@ namespace WebApp.Controllers
     [ApiController]
     public class StreetsController : ControllerBase
     {
+        private readonly DataDBContext data;
+        private readonly AuthenticationDBContext auth;
+        private UserManager<User> manager;
+        public StreetsController(UserManager<User> u, DataDBContext d, AuthenticationDBContext a)
+        {
+            data = d;
+            auth = a;
+            manager = u;
+        }
+
         // GET: api/<StreetsController>
         [HttpGet]
         public IEnumerable<string> Get()
