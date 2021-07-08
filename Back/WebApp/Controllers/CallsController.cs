@@ -75,8 +75,25 @@ namespace WebApp.Controllers
 
         // POST api/<CallsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CallDTO body)
         {
+            Call temp = new Call();
+            if (User.Identity.IsAuthenticated)
+            {
+                temp.UserID = User.Claims.First(x => x.Type == "UserID").Value;
+            }
+            else
+            {
+                temp.UserID = "-1";
+            }
+            temp.Street = data.Streets.FirstOrDefault(x => x.Name == body.Street);
+            temp.Reason = body.Reason;
+            temp.Hazard = body.Hazard;
+            temp.Comment = body.Comment;
+            data.Calls.Add(temp);
+            
+            await data.SaveChangesAsync();
+            return Ok();
         }
 
         // PUT api/<CallsController>/5
