@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApp.Controllers
 {
@@ -29,88 +30,65 @@ namespace WebApp.Controllers
             auth = a;
         }
 
-        // GET: api/Calls
+        // GET: api/<CallsController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Call>>> GetCalls()
+        public IEnumerable<string> Get()
         {
-            return await data.Calls.ToListAsync();
+            return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Calls/5
+        // GET api/<CallsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Call>> GetCall(int id)
+        public string Get(int id)
         {
-            var call = await data.Calls.FindAsync(id);
-
-            if (call == null)
-            {
-                return NotFound();
-            }
-
-            return call;
+            return "value";
         }
 
-        // PUT: api/Calls/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCall(int id, Call call)
-        {
-            if (id != call.Id)
-            {
-                return BadRequest();
-            }
-
-            data.Entry(call).State = EntityState.Modified;
-
-            try
-            {
-                await data.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CallExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Calls
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Call>> PostCall(Call call)
+        [Route("GetCallsForDevices")]
+        public IActionResult GetCallsForDevices(DeviceDTO[] body)
         {
-            data.Calls.Add(call);
-            await data.SaveChangesAsync();
-
-            return CreatedAtAction("GetCall", new { id = call.Id }, call);
-        }
-
-        // DELETE: api/Calls/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCall(int id)
-        {
-            var call = await data.Calls.FindAsync(id);
-            if (call == null)
+            List<CallDTO> ret = new List<CallDTO>();
+            List<string> adrs = new List<string>();
+            foreach (DeviceDTO d in body)
             {
-                return NotFound();
+                if (!adrs.Contains(d.Street))
+                {
+                    adrs.Add(d.Street);
+                }
             }
-
-            data.Calls.Remove(call);
-            await data.SaveChangesAsync();
-
-            return NoContent();
+            foreach (Call c in data.Calls)
+            {
+                if (adrs.Contains(c.Street.Name))
+                {
+                    User temp = auth.Users.FirstOrDefault(x => x.Id == c.UserID);
+                    string username = "Anonymous User";
+                    if (temp != null)
+                    {
+                        username = temp.FullName;
+                    }
+                    ret.Add(new CallDTO() { UserId = username, Comment = c.Comment, Hazard = c.Hazard, Reason = c.Reason, Street = c.Street.Name });
+                }
+            }
+            return Ok(new { retval = ret });
         }
 
-        private bool CallExists(int id)
+        // POST api/<CallsController>
+        [HttpPost]
+        public void Post([FromBody] string value)
         {
-            return data.Calls.Any(e => e.Id == id);
+        }
+
+        // PUT api/<CallsController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<CallsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
