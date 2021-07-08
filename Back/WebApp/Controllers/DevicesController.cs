@@ -80,8 +80,17 @@ namespace WebApp.Controllers
 
         // POST api/<DevicesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] DeviceDTO body)
         {
+            Device temp = new Device()
+            {
+                Name = body.Name,
+                Street = data.Streets.FirstOrDefault(x => x.Name == body.Street),
+                Type = body.Type,
+            };
+            data.Devices.Add(temp);
+            await data.SaveChangesAsync();
+            return Ok();
         }
 
         // PUT api/<DevicesController>/5
