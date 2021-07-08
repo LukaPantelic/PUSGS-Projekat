@@ -115,5 +115,34 @@ namespace WebApp.Controllers
             };
             return Ok(new { retval });
         }
+
+        [HttpPost]
+        [Route("EditProfile")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> EditProfile(EditProfileDTO model)
+        {
+            string id = User.Claims.First(x => x.Type == "UserID").Value;
+            User temp = await _userManager.FindByIdAsync(id);
+            temp.FullName = model.body.FullName;
+            temp.UserName = model.body.Username;
+            temp.Role = model.body.Role;
+            temp.Email = model.body.Email;
+            temp.CrewID = model.body.CrewID;
+            temp.StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.body.Street)).Id;
+            temp.DOB = model.body.DOB;
+            await _userManager.UpdateAsync(temp);
+            if (!string.IsNullOrWhiteSpace(model.body.Password))
+            {
+                if ((await _userManager.ChangePasswordAsync(temp, model.currentPassword, model.body.Password)).Succeeded)
+                {
+                    return Ok(new { msg = "changedpass" });
+                }
+                else
+                {
+                    return Ok(new { msg = "error" });
+                }
+            }
+            return Ok(new { msg = "ok" });
+        }
     }
 }
