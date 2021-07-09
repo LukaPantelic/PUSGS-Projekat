@@ -1,1 +1,90 @@
-<p>calls works!</p>
+<body>
+    <table>
+    
+        <tr>
+    
+          <td>
+            <p>Reason:</p>
+          </td>
+    
+          <td>
+            <div>
+              <p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Reason</mat-label>
+                  <mat-select [(ngModel)]="selectedReason">
+                    <mat-option value="Outage">Outage</mat-option>
+                    <mat-option value="Hazard">Hazard</mat-option>
+                    <mat-option value="Blinking Light">Blinking Light</mat-option>
+                    <mat-option value="Power Restored">Power Restored</mat-option>
+                    <mat-option value="Voltage Problems">Voltage Problems</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+            </div>
+          </td>
+    
+        </tr>
+        <tr>
+    
+            <td>
+              <p>Comment:</p>
+            </td>
+      
+            <td>
+              <div>
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label></mat-label>
+                    <input matInput placeholder="Comment" [(ngModel)]="comment">
+                  </mat-form-field>
+                </p>
+              </div>
+            </td>
+      
+          </tr>
+          <tr>
+    
+            <td>
+              <p>Hazard:</p>
+            </td>
+      
+            <td>
+              <div>
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label></mat-label>
+                    <input matInput placeholder="Hazard" [(ngModel)]="hazard">
+                  </mat-form-field>
+                </p>
+              </div>
+            </td>
+      
+          </tr>
+    
+          <tr>
+    
+            <td>
+              <p>Address:</p>
+            </td>
+      
+            <td>
+              <div>
+                <p>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Address</mat-label>
+                    <mat-select [(ngModel)]="selectedStreet">
+                      <mat-option *ngFor="let item of streets" [value]="item.name">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+              </div>
+            </td>
+      
+          </tr>
+          <td></td>
+          <td><button class="btn-regular" (click)="onSubmit()">Add</button></td>
+    </table>
+    </body>
