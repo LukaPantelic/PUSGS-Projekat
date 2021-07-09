@@ -1,34 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TeamService } from '../services/team-service/team.service';
-import { CrewMate } from '../models/crewmate.model.';
+import { Crewmate } from '../models/crewmate.model';
 import { Crew } from '../models/crew.model';
 import { ToastrService } from 'ngx-toastr';
 
 /**
  * @title Drag&Drop connected sorting
  */
-
 @Component({
-  selector: 'app-add-teams',
-  templateUrl: './add-teams.component.html',
-  styleUrls: ['./add-teams.component.css']
+  selector: 'app-add-team',
+  templateUrl: './add-team.component.html',
+  styleUrls: ['./add-team.component.css']
 })
-export class AddTeamsComponent  {
+export class AddTeamComponent {
 
-  public name!: string;
-  public selectedWorkers:CrewMate[] = [];
-  public workers:CrewMate[] = [];
+  public name!:string;
+  public selectedWorkers:Crewmate[] = [];
+  public workers:Crewmate[] = [];
 
-
-  constructor(private service:TeamService, private toastr: ToastrService ) 
-  {
-      service.getFreeCrewmates().subscribe(
-        (res:any)=>{
-          console.log(res.list);
-          this.workers = res.list;
-        }
-      )
+  constructor(private service:TeamService,private toastr: ToastrService){
+    service.getFreeCrewmates().subscribe(
+      (res:any)=>{
+        console.log(res.list);
+        this.workers = res.list;
+      }
+    )
   }
 
   onSubmit(){
@@ -62,4 +59,3 @@ export class AddTeamsComponent  {
     }
   }
 }
-
