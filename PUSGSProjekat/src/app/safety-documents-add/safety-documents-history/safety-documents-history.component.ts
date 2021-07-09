@@ -25,7 +25,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
    */
 
 @Component({
-  selector: 'app-safety-documents-history',
+  selector: 'safety-documents-history',
   templateUrl: './safety-documents-history.component.html',
   styleUrls: ['./safety-documents-history.component.css']
 })

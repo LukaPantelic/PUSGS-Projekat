@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IncidentNewComponent } from './incident-new/incident-new.component';
-import { IncidentBasicInfoComponent } from './incident-new/basic-information/basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-information.component';
 import { IncidentDevicesComponent } from './incident-new/incident-devices/incident-devices.component';
 import { IncidentResolutionComponent } from './incident-new/incident-resolution/incident-resolution.component';
 import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
@@ -21,13 +21,13 @@ import { WorkRequestsMultimediaComponent } from './work-requests-new/work-reques
 import { WorkRequestsEquipmentComponent } from './work-requests-new/work-requests-equipment/work-requests-equipment.component';
 import { UnregisterGuard } from './guards/unregister.guard';
 import { WorkerGuard } from './guards/worker.guard';
-import { NotificationComponent } from './notification/notification.component';
-import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
+import { NotificationsComponent } from './notification/notifications.component';
+import { NotificationsAllComponent } from './notification/notifications-all/notifications-all.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddConsumerComponent } from './add-consumer/add-consumer.component';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { AddNewDeviceComponent } from './add-new-device/add-new-device.component';
-import { AddTeamsComponent } from './add-teams/add-teams.component';
+import { AddTeamComponent } from './add-team/add-team.component';
 import { SafetyDocumentsComponent } from './safety-documents/safety-documents.component';
 import { SafetyDocumentsAddComponent } from './safety-documents-add/safety-documents-add.component';
 import { SafetyDocumentsBasicInfoComponent } from './safety-documents-add/safety-documents-basic-info/safety-documents-basic-info.component';
@@ -57,11 +57,11 @@ const routes: Routes = [
   { path: 'calls', component: CallsComponent, canActivate: [UnregisterGuard]},
   { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisterGuard]},
   { path: 'add-new-device', component: AddNewDeviceComponent, canActivate:[UnregisterGuard, WorkerGuard]},
-  { path: 'add-team', component: AddTeamsComponent, canActivate:[UnregisterGuard, WorkerGuard]},
+  { path: 'add-team', component: AddTeamComponent, canActivate:[UnregisterGuard, WorkerGuard]},
   { path: 'add-consumer', component: AddConsumerComponent},
   { path: 'map', component: MapComponent},
-  {path: 'notifications', component: NotificationComponent, children: [
-    {path: 'notifications-all', component: NotificationAllComponent},
+  {path: 'notifications', component: NotificationsComponent, children: [
+    {path: 'notifications-all', component: NotificationsAllComponent},
   ]},
   { path: 'incident-new', component: IncidentNewComponent, canActivate: [UnregisterGuard, WorkerGuard], children: [
     { path: 'incident-basic-info', component: IncidentBasicInfoComponent },

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TeamService } from '../services/team-service/team.service';
-import { Crewmate } from '../models/crewmate.model';
+import { CrewMate } from '../models/crewmate.model.';
 import { Crew } from '../models/crew.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,8 +16,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AddTeamComponent {
 
   public name!:string;
-  public selectedWorkers:Crewmate[] = [];
-  public workers:Crewmate[] = [];
+  public selectedWorkers:CrewMate[] = [];
+  public workers:CrewMate[] = [];
 
   constructor(private service:TeamService,private toastr: ToastrService){
     service.getFreeCrewmates().subscribe(

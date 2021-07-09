@@ -6,7 +6,7 @@ import { StreetService } from 'src/app/services/street-service/street.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-switching-plans-equipment',
+  selector: 'switching-plans-equipment',
   templateUrl: './switching-plans-equipment.component.html',
   styleUrls: ['./switching-plans-equipment.component.css']
 })

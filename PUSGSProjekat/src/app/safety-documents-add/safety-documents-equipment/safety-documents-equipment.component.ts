@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-safety-documents-equipment',
+  selector: 'safety-documents-equipment',
   templateUrl: './safety-documents-equipment.component.html',
   styleUrls: ['./safety-documents-equipment.component.css']
 })

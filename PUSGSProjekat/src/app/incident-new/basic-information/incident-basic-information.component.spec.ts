@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicInformationComponent } from './basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-basic-information.component'
 
 describe('BasicInformationComponent', () => {
-  let component: BasicInformationComponent;
-  let fixture: ComponentFixture<BasicInformationComponent>;
+  let component: IncidentBasicInfoComponent;
+  let fixture: ComponentFixture<IncidentBasicInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BasicInformationComponent ]
+      declarations: [ IncidentBasicInfoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicInformationComponent);
+    fixture = TestBed.createComponent(IncidentBasicInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

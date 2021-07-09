@@ -8,7 +8,7 @@ import {UserService} from '../services/user-service/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })

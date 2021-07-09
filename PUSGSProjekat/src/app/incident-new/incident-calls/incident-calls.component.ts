@@ -9,8 +9,8 @@ import { IncidentService } from 'src/app/services/incident-service/incident.serv
 
 @Component({
   selector: 'incident-calls',
-  templateUrl: './incident-calls.component.html',
-  styleUrls: ['./incident-calls.component.css']
+  templateUrl: 'incident-calls.component.html',
+  styleUrls: ['incident-calls.component.css']
 })
 export class IncidentCallsComponent implements AfterViewInit {
 

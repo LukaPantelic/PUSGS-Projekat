@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { IncidentService } from 'src/app/services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-safety-documents-basic-info',
+  selector: 'safety-documents-basic-info',
   templateUrl: './safety-documents-basic-info.component.html',
   styleUrls: ['./safety-documents-basic-info.component.css']
 })

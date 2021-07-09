@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-work-requests-multimedia',
+  selector: 'work-requests-multimedia',
   templateUrl: './work-requests-multimedia.component.html',
   styleUrls: ['./work-requests-multimedia.component.css']
 })
