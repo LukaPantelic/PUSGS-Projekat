@@ -95,6 +95,7 @@ import { WorkRequestsBasicInfoComponent } from './work-requests-new/work-request
 import { WorkRequestsEquipmentComponent } from './work-requests-new/work-requests-equipment/work-requests-equipment.component';
 import { WorkRequestsHistoryComponent } from './work-requests-new/work-requests-history/work-requests-history.component';
 import { WorkRequestsMultimediaComponent } from './work-requests-new/work-requests-multimedia/work-requests-multimedia.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +145,7 @@ import { WorkRequestsMultimediaComponent } from './work-requests-new/work-reques
     WorkRequestsHistoryComponent,
     TeamsComponent,
     WorkRequestsMultimediaComponent,
+    NavigationComponent,
 
   ],
   imports: [
