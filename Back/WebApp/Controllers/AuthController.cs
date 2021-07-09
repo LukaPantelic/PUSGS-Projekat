@@ -38,14 +38,46 @@ namespace WebApp.Controllers
             auth = a;
         }
 
+        // GET: api/<StreetsController>
+        [HttpGet]
+        public IActionResult Get()
+        {
+            List<UserDTO> temp = new List<UserDTO>();
+            foreach (User s in auth.Users)
+            {
+                temp.Add(new UserDTO() { Username=s.UserName, Password=s.PasswordHash });
+            }
+            return Ok(new { retval = temp });
+        }
+
 
         [HttpPost]
         [Route("Login")]
         // POST: api/<controller>/Login
         public async Task<IActionResult> Login([FromBody] UserLoginDTO login)
         {
-            User user = await _userManager.FindByNameAsync(login.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, login.Password))
+            //User user = await _userManager.FindByLoginAsync(login.Username,login.Password);
+            User user = new User();
+            foreach(var e in auth.Users)
+            {
+                if(e.UserName == login.Username)
+                {
+                    if(e.PasswordHash == login.Password)
+                    {
+                        user = e;
+                    }
+                    else
+                    {
+                        user = null;
+                    }
+
+                }
+                else
+                {
+
+                }
+            }
+            if (user != null) //&& await _userManager.CheckPasswordAsync(user, login.Password))
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -146,7 +178,7 @@ namespace WebApp.Controllers
             }
             return Ok(new { msg = "ok" });
         }
-
+        /*
         [HttpPost]
         [Route("SocialLogin")]
         // POST: api/<controller>/Login
@@ -165,7 +197,7 @@ namespace WebApp.Controllers
             return Ok(new { token });
 
         }
-
+        
         [HttpGet]
         [Route("SignInWithGoogle")]
         public IActionResult SignInWithGoogle()
@@ -177,7 +209,7 @@ namespace WebApp.Controllers
                 RedirectUri = Url.Action(nameof(HandleExternalLogin))
             });
         }
-
+        
         public async Task<IActionResult> HandleExternalLogin()
         {
             var authenticateResult = await HttpContext.AuthenticateAsync("Identity.External");
@@ -202,6 +234,6 @@ namespace WebApp.Controllers
 
             return Redirect("http://localhost:4200/home");
         }
-
+        */
     }
 }

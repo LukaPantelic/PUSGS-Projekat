@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Repository;
 
 namespace WebApp.Migrations.AuthenticationDB
 {
     [DbContext(typeof(AuthenticationDBContext))]
-    partial class AuthenticationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210709225715_fsdad")]
+    partial class fsdad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,17 +236,17 @@ namespace WebApp.Migrations.AuthenticationDB
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2cf82b0-aaf5-4131-ba9a-ad58c130a39f",
+                            ConcurrencyStamp = "c5f095c3-ae10-434a-9024-3e743592ddb7",
                             CrewID = 0,
-                            DOB = new DateTime(2021, 7, 10, 0, 59, 11, 297, DateTimeKind.Local).AddTicks(2838),
+                            DOB = new DateTime(2021, 7, 10, 0, 57, 14, 736, DateTimeKind.Local).AddTicks(177),
                             Email = "bla",
                             EmailConfirmed = false,
                             FullName = "Aleksa Milivojevic",
                             LockoutEnabled = false,
-                            PasswordHash = "123456787654321",
+                            PasswordHash = "12345678987654321",
                             PhoneNumberConfirmed = false,
                             Role = "Dispatcher",
-                            SecurityStamp = "f5996007-e610-499c-8bd7-dac631de3f71",
+                            SecurityStamp = "df1824cf-da36-4420-a5c0-b3adca4e6d08",
                             StreetID = 3,
                             TwoFactorEnabled = false,
                             UserName = "mili"
@@ -253,9 +255,9 @@ namespace WebApp.Migrations.AuthenticationDB
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac21d17d-2c9d-4b37-b574-e99d7a99b25a",
+                            ConcurrencyStamp = "05bab0fe-cbf5-4818-93cd-2b52f6bee44a",
                             CrewID = 0,
-                            DOB = new DateTime(2021, 7, 10, 0, 59, 11, 300, DateTimeKind.Local).AddTicks(6799),
+                            DOB = new DateTime(2021, 7, 10, 0, 57, 14, 738, DateTimeKind.Local).AddTicks(5596),
                             Email = "bla",
                             EmailConfirmed = false,
                             FullName = "Admin Admin",
@@ -263,7 +265,7 @@ namespace WebApp.Migrations.AuthenticationDB
                             PasswordHash = "1234567887654321",
                             PhoneNumberConfirmed = false,
                             Role = "Dispatcher",
-                            SecurityStamp = "8f0c6666-c14b-4737-b448-693f57ccedcf",
+                            SecurityStamp = "7a60105e-048b-4ae4-80f8-c0e5d693969f",
                             StreetID = 3,
                             TwoFactorEnabled = false,
                             UserName = "admin"
