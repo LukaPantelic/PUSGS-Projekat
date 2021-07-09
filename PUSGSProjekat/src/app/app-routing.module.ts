@@ -94,6 +94,7 @@ const routes: Routes = [
     { path: 'safety-documents-equipment', component: SafetyDocumentsEquipmentComponent},
     { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
   ]},
+  { path: 'teams', component: TeamsComponent, canActivate:[UnregisterGuard]},
 ];
 
 @NgModule({
