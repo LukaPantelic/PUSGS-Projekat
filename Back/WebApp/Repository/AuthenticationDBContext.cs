@@ -17,8 +17,9 @@ namespace WebApp.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
-                new User() { Id = "1", UserName = "mili", PasswordHash = "12345678", FullName = "Aleksa Milivojevic", DOB = DateTime.Now, Role = "admin", StreetID = 1, CrewID = 1, Email = "bla" }
-            );
+                new User() { Id = "1", UserName = "mili", PasswordHash = "12345678987654321", FullName = "Aleksa Milivojevic", DOB = DateTime.Now, Role = "Dispatcher", StreetID = 3, Email = "bla" }, 
+                new User() { Id = "2", UserName = "admin", PasswordHash = "1234567887654321", FullName = "Admin Admin", DOB = DateTime.Now, Role = "Dispatcher", StreetID = 3, Email = "bla" }
+                );
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -10,15 +10,28 @@ namespace WebApp.Repository
 {
     public class DataDBContext : DbContext
     {
+        DataDBContext data;
         public DataDBContext(DbContextOptions<DataDBContext> options) : base(options)
         {
-
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Street>().HasData(
+                new Street() { Id = 2, Name = "Pasterova", Priority = 7 },
+                new Street() { Id = 1, Name = "Gagarinova", Priority = 8 }
+            );
+            modelBuilder.Entity<Device>().HasData(
+                new Device() { Id = 3, Street=null, Name = "Bla", Type = "nesto", CoordX = 9.8, CoordY = 9.8 }
+            ) ;
+            base.OnModelCreating(modelBuilder);
+        }
+
 
         public DbSet<Street> Streets { get; set; }
         public DbSet<Call> Calls { get; set; }
