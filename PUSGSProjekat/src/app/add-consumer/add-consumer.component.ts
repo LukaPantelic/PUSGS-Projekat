@@ -7,8 +7,8 @@ import { IncidentService } from '../services/incident-service/incident.service';
 
 @Component({
   selector: 'add-consumer',
-  templateUrl: './add-consumer.component.html',
-  styleUrls: ['./add-consumer.component.css']
+  templateUrl: 'add-consumer.component.html',
+  styleUrls: ['add-consumer.component.css']
 })
 export class AddConsumerComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'type', 'voltage', 'scheduledTime'];

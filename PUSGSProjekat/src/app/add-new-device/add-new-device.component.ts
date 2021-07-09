@@ -6,7 +6,7 @@ import { StreetService } from '../services/street-service/street.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-add-new-device',
+  selector: 'add-new-device',
   templateUrl: './add-new-device.component.html',
   styleUrls: ['./add-new-device.component.css']
 })

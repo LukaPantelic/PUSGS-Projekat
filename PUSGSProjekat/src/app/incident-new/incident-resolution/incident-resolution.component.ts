@@ -3,7 +3,7 @@ import { Incident } from 'src/app/models/incident..model';
 import { IncidentService } from 'src/app/services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-incident-resolution',
+  selector: 'incident-resolution',
   templateUrl: './incident-resolution.component.html',
   styleUrls: ['./incident-resolution.component.css']
 })

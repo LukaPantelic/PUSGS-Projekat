@@ -4,7 +4,7 @@ import { Incident } from 'src/app/models/incident..model';
 import { IncidentService } from 'src/app/services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-switching-plans-basic-info',
+  selector: 'switching-plans-basic-info',
   templateUrl: './switching-plans-basic-info.component.html',
   styleUrls: ['./switching-plans-basic-info.component.css']
 })

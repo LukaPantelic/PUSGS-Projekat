@@ -7,9 +7,9 @@ import { Device } from '../models/device.model';
 import { DeviceService } from '../services/device-service/device.service';
 
 @Component({
-  selector: 'app-add-device',
-  templateUrl: './add-device.component.html',
-  styleUrls: ['./add-device.component.css']
+  selector: 'add-device',
+  templateUrl: 'add-device.component.html',
+  styleUrls: ['add-device.component.css']
 })
 export class AddDeviceComponent implements AfterViewInit {
 

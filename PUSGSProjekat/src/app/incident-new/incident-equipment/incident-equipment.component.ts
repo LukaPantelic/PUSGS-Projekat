@@ -23,9 +23,9 @@ const NAMES: string[] = [
  */
 
 @Component({
-  selector: 'app-incident-equipment',
-  templateUrl: './incident-equipment.component.html',
-  styleUrls: ['./incident-equipment.component.css']
+  selector: 'incident-equipment',
+  templateUrl: 'incident-equipment.component.html',
+  styleUrls: ['incident-equipment.component.css']
 })
 export class IncidentEquipmentComponent implements AfterViewInit {
 
