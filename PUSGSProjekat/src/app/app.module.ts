@@ -88,7 +88,7 @@ import { SwitchingPlansMultimediaComponent } from './switching-plans-new/switchi
 import { CallsComponent } from './calls/calls.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { MapComponent } from './map/map.component';
-import { AddTeamComponent } from './teams/teams.component';
+import { TeamsComponent } from './teams/teams.component';
 import { WorkRequestsComponent } from './work-requests/work-requests.component';
 import { WorkRequestsNewComponent } from './work-requests-new/work-requests-new.component';
 import { WorkRequestsBasicInfoComponent } from './work-requests-new/work-requests-basic-info/work-requests-basic-info.component';
@@ -136,13 +136,15 @@ import { WorkRequestsMultimediaComponent } from './work-requests-new/work-reques
     CallsComponent,
     DeviceModalComponent,
     MapComponent,
-    AddTeamComponent,
+    AddTeamsComponent,
     WorkRequestsComponent,
     WorkRequestsNewComponent,
     WorkRequestsBasicInfoComponent,
     WorkRequestsEquipmentComponent,
     WorkRequestsHistoryComponent,
-    WorkRequestsMultimediaComponent
+    TeamsComponent,
+    WorkRequestsMultimediaComponent,
+
   ],
   imports: [
     HttpClientModule,

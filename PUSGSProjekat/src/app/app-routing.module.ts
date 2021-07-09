@@ -45,7 +45,7 @@ import { SwitchingPlansChecklistComponent } from './switching-plans-new/switchin
 import { MapComponent } from './map/map.component';
 import { CallsComponent } from './calls/calls.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
-import { AddTeamComponent } from './teams/teams.component'; 
+import { TeamsComponent } from './teams/teams.component'; 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'calls', component: CallsComponent, canActivate: [UnregisterGuard]},
   { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisterGuard]},
   { path: 'add-new-device', component: AddNewDeviceComponent, canActivate:[UnregisterGuard, WorkerGuard]},
-  { path: 'add-team', component: AddTeamComponent, canActivate:[UnregisterGuard, WorkerGuard]},
+  { path: 'add-team', component: AddTeamsComponent, canActivate:[UnregisterGuard, WorkerGuard]},
   { path: 'add-consumer', component: AddConsumerComponent},
   { path: 'map', component: MapComponent},
   {path: 'notifications', component: NotificationComponent, children: [
