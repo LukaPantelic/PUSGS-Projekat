@@ -6,9 +6,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table'; 
 
 @Component({
-  selector: 'app-incident-browser',
-  templateUrl: './incident-browser.component.html',
-  styleUrls: ['./incident-browser.component.css']
+  selector: 'incident-browser',
+  templateUrl: 'incident-browser.component.html',
+  styleUrls: ['incident-browser.component.css']
 })
 export class IncidentBrowserComponent implements AfterViewInit {
 

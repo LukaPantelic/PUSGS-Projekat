@@ -6,7 +6,7 @@ import { Incident } from '../models/incident..model';
 import { IncidentService } from '../services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-switching-plans',
+  selector: 'switching-plans',
   templateUrl: './switching-plans.component.html',
   styleUrls: ['./switching-plans.component.css']
 })

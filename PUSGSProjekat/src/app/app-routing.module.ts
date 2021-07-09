@@ -50,9 +50,10 @@ import { TeamsComponent } from './teams/teams.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]},
   { path: 'register', component: RegisterComponent},
+  { path: 'incident-browser', component: IncidentBrowserComponent, canActivate: [UnregisterGuard]},
   {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]},
   { path: 'calls', component: CallsComponent, canActivate: [UnregisterGuard]},
   { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisterGuard]},
   { path: 'add-new-device', component: AddNewDeviceComponent, canActivate:[UnregisterGuard, WorkerGuard]},

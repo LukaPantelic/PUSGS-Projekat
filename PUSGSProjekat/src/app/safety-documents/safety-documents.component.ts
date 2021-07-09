@@ -6,7 +6,7 @@ import { Incident } from '../models/incident..model';
 import { IncidentService } from '../services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-safety-documents',
+  selector: 'safety-documents',
   templateUrl: './safety-documents.component.html',
   styleUrls: ['./safety-documents.component.css']
 })

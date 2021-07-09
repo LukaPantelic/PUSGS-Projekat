@@ -3,7 +3,7 @@ import { Incident } from '../models/incident..model';
 import { IncidentService } from '../services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-safety-documents-add',
+  selector: 'safety-documents-add',
   templateUrl: './safety-documents-add.component.html',
   styleUrls: ['./safety-documents-add.component.css']
 })

@@ -5,7 +5,9 @@ import { CrewMate } from '../models/crewmate.model.';
 import { Crew } from '../models/crew.model';
 import { ToastrService } from 'ngx-toastr';
 
-
+/**
+ * @title Drag&Drop connected sorting
+ */
 
 @Component({
   selector: 'app-add-teams',

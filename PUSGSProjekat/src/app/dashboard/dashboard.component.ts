@@ -4,11 +4,11 @@ import { SingleDataSet, Color, Label, monkeyPatchChartJsLegend, monkeyPatchChart
 
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   // Pie
   public pieChartOptions: ChartOptions = {

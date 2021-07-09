@@ -10,9 +10,9 @@ import { IncidentService } from 'src/app/services/incident-service/incident.serv
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-incident-devices',
-  templateUrl: './incident-devices.component.html',
-  styleUrls: ['./incident-devices.component.css']
+  selector: 'incident-devices',
+  templateUrl: 'incident-devices.component.html',
+  styleUrls: ['incident-devices.component.css']
 })
 export class IncidentDevicesComponent implements AfterViewInit {
 

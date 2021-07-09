@@ -3,7 +3,7 @@ import { Incident } from '../models/incident..model';
 import { IncidentService } from '../services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-switching-plans-new',
+  selector: 'switching-plans-new',
   templateUrl: './switching-plans-new.component.html',
   styleUrls: ['./switching-plans-new.component.css']
 })

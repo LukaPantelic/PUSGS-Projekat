@@ -5,9 +5,9 @@ import { IncidentService } from 'src/app/services/incident-service/incident.serv
 import { TeamService } from 'src/app/services/team-service/team.service';
 
 @Component({
-  selector: 'app-incident-crew',
-  templateUrl: './incident-crew.component.html',
-  styleUrls: ['./incident-crew.component.css']
+  selector: 'incident-crew',
+  templateUrl: 'incident-crew.component.html',
+  styleUrls: ['incident-crew.component.css']
 })
 export class IncidentCrewComponent{
 

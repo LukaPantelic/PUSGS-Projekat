@@ -7,7 +7,7 @@ import { IncidentService } from 'src/app/services/incident-service/incident.serv
 import { StreetService } from 'src/app/services/street-service/street.service';
 
 @Component({
-  selector: 'app-basic-information',
+  selector: 'incident-basic-info',
   templateUrl: './basic-information.component.html',
   styleUrls: ['./basic-information.component.css']
 })

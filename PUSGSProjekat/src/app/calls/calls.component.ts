@@ -8,7 +8,7 @@ import { CallService } from '../services/call-service/call.service';
 import { StreetService } from '../services/street-service/street.service';
 
 @Component({
-  selector: 'app-calls',
+  selector: 'calls',
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.css']
 })

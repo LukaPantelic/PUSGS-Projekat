@@ -8,7 +8,7 @@ import { CallService } from 'src/app/services/call-service/call.service';
 import { IncidentService } from 'src/app/services/incident-service/incident.service';
 
 @Component({
-  selector: 'app-incident-calls',
+  selector: 'incident-calls',
   templateUrl: './incident-calls.component.html',
   styleUrls: ['./incident-calls.component.css']
 })
