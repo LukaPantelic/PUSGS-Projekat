@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Repository;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(DataDBContext))]
-    partial class DataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210709183004_initii")]
+    partial class initii
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,16 +126,6 @@ namespace WebApp.Migrations
                     b.HasIndex("StreetId");
 
                     b.ToTable("Devices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            CoordX = 9.8000000000000007,
-                            CoordY = 9.8000000000000007,
-                            Name = "Bla",
-                            Type = "nesto"
-                        });
                 });
 
             modelBuilder.Entity("WebApp.Models.HistoricChange", b =>
@@ -439,12 +431,6 @@ namespace WebApp.Migrations
                     b.ToTable("Streets");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Name = "Pasterova",
-                            Priority = 7
-                        },
                         new
                         {
                             Id = 1,

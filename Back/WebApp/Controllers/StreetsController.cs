@@ -42,9 +42,20 @@ namespace WebApp.Controllers
 
         // GET api/<StreetsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            foreach (Street s in data.Streets)
+            {
+                if (s.Id == id)
+                {
+                    return Ok(new { retval = s });
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            return Ok();
         }
 
         [HttpPost]
