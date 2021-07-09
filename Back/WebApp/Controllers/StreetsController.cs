@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.DTOs;
 using WebApp.Models;
 using WebApp.Repository;
 
@@ -27,9 +30,14 @@ namespace WebApp.Controllers
 
         // GET: api/<StreetsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            List<StreetDTO> temp = new List<StreetDTO>();
+            foreach (Street s in data.Streets)
+            {
+                temp.Add(new StreetDTO() { Id = s.Id, Name = s.Name, Priority = s.Priority });
+            }
+            return Ok(new { retval = temp });
         }
 
         // GET api/<StreetsController>/5
@@ -39,10 +47,45 @@ namespace WebApp.Controllers
             return "value";
         }
 
+        [HttpPost]
+        [Route("GetPriorityForDevices")]
+        public IActionResult GetPriorityForDevices(DeviceDTO[] body)
+        {
+            List<string> temp = new List<string>();
+            foreach (DeviceDTO d in body)
+            {
+                if (!temp.Contains(d.Street))
+                {
+                    temp.Add(d.Street);
+                }
+            }
+            int max = 0;
+            foreach (Street s in data.Streets)
+            {
+                if (temp.Contains(s.Name))
+                {
+                    if (s.Priority > max)
+                    {
+                        max = s.Priority;
+                    }
+                }
+            }
+            return Ok(new { max });
+        }
+
         // POST api/<StreetsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Post([FromBody] StreetDTO body)
         {
+            Street temp = new Street();
+            {
+                temp.Name = body.Name;
+                temp.Priority = body.Priority;
+            };
+            data.Streets.Add(temp);
+            await data.SaveChangesAsync();
+            return Ok();
         }
 
         // PUT api/<StreetsController>/5
