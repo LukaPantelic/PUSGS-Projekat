@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Repository;
 
 namespace WebApp.Migrations.AuthenticationDB
 {
     [DbContext(typeof(AuthenticationDBContext))]
-    partial class AuthenticationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210709011902_initiale")]
+    partial class initiale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,27 +230,6 @@ namespace WebApp.Migrations.AuthenticationDB
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca6f1945-3ed8-412a-afd8-e81087e4b57c",
-                            CrewID = 1,
-                            DOB = new DateTime(2021, 7, 9, 3, 21, 29, 562, DateTimeKind.Local).AddTicks(8487),
-                            Email = "bla",
-                            EmailConfirmed = false,
-                            FullName = "Aleksa Milivojevic",
-                            LockoutEnabled = false,
-                            PasswordHash = "12345678",
-                            PhoneNumberConfirmed = false,
-                            Role = "admin",
-                            SecurityStamp = "78a3224e-277d-4df7-a6ed-8b511e3b9263",
-                            StreetID = 1,
-                            TwoFactorEnabled = false,
-                            UserName = "mili"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
