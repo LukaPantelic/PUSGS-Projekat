@@ -51,8 +51,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IncidentBrowserComponent } from './incident-browser/incident-browser.component';
-import { NotificationComponent } from './notification/notification.component';
-import { NotificationAllComponent } from './notification/notification-all/notification-all.component';
+import { NotificationsComponent } from './notification/notifications.component';
+import { NotificationsAllComponent } from './notification/notifications-all/notifications-all.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -62,7 +62,7 @@ import { AuthInterceptor } from './authInterceptor';
 import { AddConsumerComponent } from './add-consumer/add-consumer.component';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { AddNewDeviceComponent } from './add-new-device/add-new-device.component';
-import { AddTeamsComponent } from './add-teams/add-teams.component';
+import { AddTeamComponent } from './add-team/add-team.component';
 import { SafetyDocumentsComponent } from './safety-documents/safety-documents.component';
 import { SafetyDocumentsAddComponent } from './safety-documents-add/safety-documents-add.component';
 import { SwitchingPlansComponent } from './switching-plans/switching-plans.component';
@@ -72,7 +72,7 @@ import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety
 import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
 import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
 import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
-import { IncidentBasicInfoComponent } from './incident-new/basic-information/basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-information.component';
 import { IncidentNewComponent } from './incident-new/incident-new.component';
 import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
 import { IncidentCrewComponent } from './incident-new/incident-crew/incident-crew.component';
@@ -105,13 +105,13 @@ import { NavigationComponent } from './navigation/navigation.component';
     RegisterComponent,
     ProfileComponent,
     IncidentBrowserComponent,
-    NotificationComponent,
-    NotificationAllComponent,
+    NotificationsComponent,
+    NotificationsAllComponent,
     SidebarComponent,
     AddConsumerComponent,
     AddDeviceComponent,
     AddNewDeviceComponent,
-    AddTeamsComponent,
+    AddTeamComponent,
     SafetyDocumentsComponent,
     SafetyDocumentsAddComponent,
     SwitchingPlansComponent,
@@ -137,7 +137,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     CallsComponent,
     DeviceModalComponent,
     MapComponent,
-    AddTeamsComponent,
+    AddTeamComponent,
     WorkRequestsComponent,
     WorkRequestsNewComponent,
     WorkRequestsBasicInfoComponent,
