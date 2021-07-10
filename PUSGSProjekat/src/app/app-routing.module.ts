@@ -47,7 +47,7 @@ import { CallsComponent } from './calls/calls.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { TeamsComponent } from './teams/teams.component'; 
 
-const routes: Routes = [
+/*const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisteredGuard]},
   { path: 'register', component: RegisterComponent},
@@ -96,6 +96,58 @@ const routes: Routes = [
     { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
   ]},
   { path: 'teams', component: TeamsComponent, canActivate:[UnregisteredGuard]},
+];*/
+
+const routes: Routes = [
+  {path: '', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'incident-browser', component: IncidentBrowserComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent},
+  { path: 'calls', component: CallsComponent},
+  { path: 'add-device', component: AddDeviceComponent},
+  { path: 'add-new-device', component: AddNewDeviceComponent},
+  { path: 'add-team', component: AddTeamComponent},
+  { path: 'add-consumer', component: AddConsumerComponent},
+  { path: 'map', component: MapComponent},
+  { path: 'app-sidebar', component: SidebarComponent},
+  {path: 'notifications', component: NotificationsComponent, children: [
+    {path: 'notifications-all', component: NotificationsAllComponent},
+  ]},
+  { path: 'incident-new', component: IncidentNewComponent, children: [
+    { path: 'incident-basic-info', component: IncidentBasicInfoComponent },
+    { path: 'incident-devices', component: IncidentDevicesComponent },
+    { path: 'incident-resolution', component: IncidentResolutionComponent },
+    { path: 'incident-calls', component: IncidentCallsComponent },
+    { path: 'incident-crew', component: IncidentCrewComponent },
+    { path: 'incident-multimedia', component: IncidentMultimediaComponent },
+    { path: 'incident-equipment', component: IncidentEquipmentComponent },
+  ]},
+  { path: 'work-requests', component: WorkRequestsComponent},
+  { path: 'work-requests-new', component: WorkRequestsNewComponent, children: [
+    { path: 'work-requests-basic-info', component: WorkRequestsBasicInfoComponent },
+    { path: 'work-requests-history', component: WorkRequestsHistoryComponent },
+    { path: 'work-requests-multimedia', component: WorkRequestsMultimediaComponent },
+    { path: 'work-requests-equipment', component: WorkRequestsEquipmentComponent },
+  ]},
+  { path: 'switching-plans', component: SwitchingPlansComponent},
+  { path: 'switching-plans-new', component: SwitchingPlansNewComponent, children: [
+    { path: 'switching-plans-basic-info', component: SwitchingPlansBasicInfoComponent},
+    { path: 'switching-plans-history', component: SwitchingPlansHistoryComponent},
+    { path: 'switching-plans-multimedia', component: SwitchingPlansMultimediaComponent},
+    { path: 'switching-plans-equipment', component: SwitchingPlansEquipmentComponent},
+    { path: 'switching-plans-checklist', component: SwitchingPlansChecklistComponent},
+  ]},
+  { path: 'safety-documents', component: SafetyDocumentsComponent},
+  { path: 'safety-documents-add', component: SafetyDocumentsAddComponent, children: [
+    { path: 'safety-documents-basic-info', component: SafetyDocumentsBasicInfoComponent},
+    { path: 'safety-documents-history', component: SafetyDocumentsHistoryComponent},
+    { path: 'safety-documents-multimedia', component: SafetyDocumentsMultimediaComponent},
+    { path: 'safety-documents-equipment', component: SafetyDocumentsEquipmentComponent},
+    { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
+  ]},
+  { path: 'teams', component: TeamsComponent},
 ];
 
 @NgModule({
