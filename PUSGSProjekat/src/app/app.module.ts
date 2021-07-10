@@ -56,7 +56,7 @@ import { NotificationsAllComponent } from './notification/notifications-all/noti
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UnregisterGuard } from './guards/unregister.guard';
+import { UnregisteredGuard } from './guards/unregistered.guard';
 import { WorkerGuard } from './guards/worker.guard';
 import { AuthInterceptor } from './authInterceptor';
 import { AddConsumerComponent } from './add-consumer/add-consumer.component';
@@ -72,7 +72,7 @@ import { SafetyDocumentsChecklistComponent } from './safety-documents-add/safety
 import { SafetyDocumentsEquipmentComponent } from './safety-documents-add/safety-documents-equipment/safety-documents-equipment.component';
 import { SafetyDocumentsHistoryComponent } from './safety-documents-add/safety-documents-history/safety-documents-history.component';
 import { SafetyDocumentsMultimediaComponent } from './safety-documents-add/safety-documents-multimedia/safety-documents-multimedia.component';
-import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-info.component';
 import { IncidentNewComponent } from './incident-new/incident-new.component';
 import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
 import { IncidentCrewComponent } from './incident-new/incident-crew/incident-crew.component';
@@ -239,7 +239,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     DragDropModule,
   ],
   providers: [
-    UnregisterGuard,
+    UnregisteredGuard,
     WorkerGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],

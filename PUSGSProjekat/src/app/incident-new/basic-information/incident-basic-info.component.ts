@@ -8,8 +8,8 @@ import { StreetService } from 'src/app/services/street-service/street.service';
 
 @Component({
   selector: 'incident-basic-info',
-  templateUrl: './incident-basic-information.component.html',
-  styleUrls: ['./incident-basic-information.component.css']
+  templateUrl: './incident-basic-info.component.html',
+  styleUrls: ['./incident-basic-info.component.css']
 })
 export class IncidentBasicInfoComponent implements OnInit {
   

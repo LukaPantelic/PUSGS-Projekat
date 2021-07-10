@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IncidentBasicInfoComponent } from './incident-basic-information.component'
+import{ IncidentBasicInfoComponent} from './incident-basic-info.component';
 
-describe('BasicInformationComponent', () => {
+describe('IncidentNewComponent', () => {
   let component: IncidentBasicInfoComponent;
   let fixture: ComponentFixture<IncidentBasicInfoComponent>;
 
