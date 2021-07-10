@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             auth = a;
         }
 
-        // GET: api/<StreetsController>
+        // GET: api/<AuthController>
         [HttpGet]
         public IActionResult Get()
         {
