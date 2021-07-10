@@ -29,7 +29,7 @@ namespace WebApp.Controllers
         private readonly AuthenticationDBContext auth;
         private UserManager<User> _userManager;
         private ApplicationSettings _appSettings;
-
+        private int bla;
         public AuthController(UserManager<User> userManager, IOptions<ApplicationSettings> appSettings, DataDBContext d, AuthenticationDBContext a)
         {
             _userManager = userManager;
@@ -104,6 +104,13 @@ namespace WebApp.Controllers
         [Route("Register")]
         public async Task<Object> Post([FromBody] UserDTO model)
         {
+            foreach(var i in data.Streets)
+            {
+                if(i.Name==model.Street)
+                {
+                    bla = i.Id;
+                }
+            }
             User applicationUser = new User()
             {
                 UserName = model.Username,
@@ -112,7 +119,8 @@ namespace WebApp.Controllers
                 DOB = model.DOB,
                 Role = model.Role,
                 CrewID = model.CrewID,
-                StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.Street)).Id
+                StreetID = bla
+                //StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.Street)).Id
             };
             try
             {
