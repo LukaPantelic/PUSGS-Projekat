@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IncidentNewComponent } from './incident-new/incident-new.component';
-import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-information.component';
+import { IncidentBasicInfoComponent } from './incident-new/basic-information/incident-basic-info.component';
 import { IncidentDevicesComponent } from './incident-new/incident-devices/incident-devices.component';
 import { IncidentResolutionComponent } from './incident-new/incident-resolution/incident-resolution.component';
 import { IncidentCallsComponent } from './incident-new/incident-calls/incident-calls.component';
@@ -19,7 +19,7 @@ import { WorkRequestsBasicInfoComponent } from './work-requests-new/work-request
 import { WorkRequestsHistoryComponent } from './work-requests-new/work-requests-history/work-requests-history.component';
 import { WorkRequestsMultimediaComponent } from './work-requests-new/work-requests-multimedia/work-requests-multimedia.component';
 import { WorkRequestsEquipmentComponent } from './work-requests-new/work-requests-equipment/work-requests-equipment.component';
-import { UnregisterGuard } from './guards/unregister.guard';
+import { UnregisteredGuard } from './guards/unregistered.guard';
 import { WorkerGuard } from './guards/worker.guard';
 import { NotificationsComponent } from './notification/notifications.component';
 import { NotificationsAllComponent } from './notification/notifications-all/notifications-all.component';
@@ -49,21 +49,21 @@ import { TeamsComponent } from './teams/teams.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisterGuard]},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisteredGuard]},
   { path: 'register', component: RegisterComponent},
-  { path: 'incident-browser', component: IncidentBrowserComponent, canActivate: [UnregisterGuard]},
+  { path: 'incident-browser', component: IncidentBrowserComponent, canActivate: [UnregisteredGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [UnregisterGuard]},
-  { path: 'calls', component: CallsComponent, canActivate: [UnregisterGuard]},
-  { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisterGuard]},
-  { path: 'add-new-device', component: AddNewDeviceComponent, canActivate:[UnregisterGuard, WorkerGuard]},
-  { path: 'add-team', component: AddTeamComponent, canActivate:[UnregisterGuard, WorkerGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [UnregisteredGuard]},
+  { path: 'calls', component: CallsComponent, canActivate: [UnregisteredGuard]},
+  { path: 'add-device', component: AddDeviceComponent, canActivate:[UnregisteredGuard]},
+  { path: 'add-new-device', component: AddNewDeviceComponent, canActivate:[UnregisteredGuard, WorkerGuard]},
+  { path: 'add-team', component: AddTeamComponent, canActivate:[UnregisteredGuard, WorkerGuard]},
   { path: 'add-consumer', component: AddConsumerComponent},
   { path: 'map', component: MapComponent},
   {path: 'notifications', component: NotificationsComponent, children: [
     {path: 'notifications-all', component: NotificationsAllComponent},
   ]},
-  { path: 'incident-new', component: IncidentNewComponent, canActivate: [UnregisterGuard, WorkerGuard], children: [
+  { path: 'incident-new', component: IncidentNewComponent, canActivate: [UnregisteredGuard, WorkerGuard], children: [
     { path: 'incident-basic-info', component: IncidentBasicInfoComponent },
     { path: 'incident-devices', component: IncidentDevicesComponent },
     { path: 'incident-resolution', component: IncidentResolutionComponent },
@@ -95,7 +95,7 @@ const routes: Routes = [
     { path: 'safety-documents-equipment', component: SafetyDocumentsEquipmentComponent},
     { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
   ]},
-  { path: 'teams', component: TeamsComponent, canActivate:[UnregisterGuard]},
+  { path: 'teams', component: TeamsComponent, canActivate:[UnregisteredGuard]},
 ];
 
 @NgModule({

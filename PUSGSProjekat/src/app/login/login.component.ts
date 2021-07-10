@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
