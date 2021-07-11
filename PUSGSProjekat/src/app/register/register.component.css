@@ -29,7 +29,7 @@ body {
 }
 
 .registration {
-    background: linear-gradient(to left, #ffb336, #ba102a, #8d274a, #319197);
+    background: linear-gradient(to bottom, #165396 0%, #ddf1f9 55%, #feffff 94%);
     margin: 0;
     width: 600px;
     height: auto;
