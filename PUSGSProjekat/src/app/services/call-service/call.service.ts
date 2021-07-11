@@ -9,7 +9,7 @@ import { Device } from "src/app/models/device.model";
 })
 
 export class CallService {
-    private baseUrl = "https://localhost:44364/api/Calls/";
+    private baseUrl = "https://localhost:44381/api/Calls/";
 
     constructor(private http:HttpClient){}
 

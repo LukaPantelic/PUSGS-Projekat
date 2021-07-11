@@ -7,7 +7,7 @@ import { Crew } from "src/app/models/crew.model";
 })
 
 export class TeamService{
-    private baseUrl = "https://localhost:44364/api/Crews/"
+    private baseUrl = "https://localhost:44381/api/Crews/"
   constructor(private http:HttpClient) { }
 
   getCrews(){

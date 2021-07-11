@@ -28,7 +28,10 @@ namespace WebApp.Repository
             );
             modelBuilder.Entity<Device>().HasData(
                 new Device() { Id = 3, Street=null, Name = "Bla", Type = "nesto", CoordX = 9.8, CoordY = 9.8 }
-            ) ;
+            );
+            modelBuilder.Entity<Incident>().HasData(
+                new Incident() { Id=1 , Type ="bla",Confirmed=true,Status="ok",ETA=DateTime.Now, ATA = DateTime.Now ,ETR = DateTime.Now ,AffectedCustomers=2,Voltage=220,ScheduledTime = DateTime.Now,Cause="bla",Subcause="bla",ConstructionType="bla",Material="bla"}
+            );
             base.OnModelCreating(modelBuilder);
         }
 

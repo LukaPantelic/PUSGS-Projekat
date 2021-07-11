@@ -7,7 +7,7 @@ import { Incident } from "src/app/models/incident..model";
     providedIn: 'root'
 })
 export class IncidentService{
-    private baseUrl = "http://localhost:44364/api/Incidents"
+    private baseUrl = "https://localhost:44381/api/Incidents"
     public currentIncident!:Incident;
     public currentCrew!:number;
     public currentDevices: Device[] = [];

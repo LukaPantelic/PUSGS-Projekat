@@ -7,7 +7,7 @@ import { Device } from "src/app/models/device.model";
 })
 
 export class DeviceService{
-    private baseUrl = "https://localhost:44364/api/Devices/";
+    private baseUrl = "https://localhost:44381/api/Devices/";
 
     constructor(private http:HttpClient){}
 
