@@ -45,9 +45,9 @@ import { SwitchingPlansChecklistComponent } from './switching-plans-new/switchin
 import { MapComponent } from './map/map.component';
 import { CallsComponent } from './calls/calls.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
-import { TeamsComponent } from './teams/teams.component'; 
+import { TeamsComponent } from './teams/teams.component';
 
-/*const routes: Routes = [
+const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [UnregisteredGuard]},
   { path: 'register', component: RegisterComponent},
@@ -96,8 +96,8 @@ import { TeamsComponent } from './teams/teams.component';
     { path: 'safety-documents-checklist', component: SafetyDocumentsChecklistComponent},
   ]},
   { path: 'teams', component: TeamsComponent, canActivate:[UnregisteredGuard]},
-];*/
-
+];
+/*
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
@@ -149,7 +149,7 @@ const routes: Routes = [
   ]},
   { path: 'teams', component: TeamsComponent},
 ];
-
+*/
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

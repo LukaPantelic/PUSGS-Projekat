@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Repository;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(DataDBContext))]
-    partial class DataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210711142203_Drezga")]
+    partial class Drezga
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,16 +82,6 @@ namespace WebApp.Migrations
                     b.HasIndex("StreetId");
 
                     b.ToTable("Consumers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Drezga",
-                            Phone = "0600600606",
-                            Surname = "Dusanovac",
-                            Type = "Commercial"
-                        });
                 });
 
             modelBuilder.Entity("WebApp.Models.Crew", b =>
@@ -111,16 +103,6 @@ namespace WebApp.Migrations
                         {
                             Id = 3,
                             Name = "Profesional"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Programeri"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Name = "Drezga"
                         });
                 });
 
@@ -258,15 +240,15 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = 1,
-                            ATA = new DateTime(2021, 7, 11, 16, 35, 12, 530, DateTimeKind.Local).AddTicks(1495),
+                            ATA = new DateTime(2021, 7, 11, 16, 22, 2, 445, DateTimeKind.Local).AddTicks(9991),
                             AffectedCustomers = 2,
                             Cause = "bla",
                             Confirmed = true,
                             ConstructionType = "bla",
-                            ETA = new DateTime(2021, 7, 11, 16, 35, 12, 527, DateTimeKind.Local).AddTicks(4015),
-                            ETR = new DateTime(2021, 7, 11, 16, 35, 12, 530, DateTimeKind.Local).AddTicks(2175),
+                            ETA = new DateTime(2021, 7, 11, 16, 22, 2, 443, DateTimeKind.Local).AddTicks(5200),
+                            ETR = new DateTime(2021, 7, 11, 16, 22, 2, 446, DateTimeKind.Local).AddTicks(643),
                             Material = "bla",
-                            ScheduledTime = new DateTime(2021, 7, 11, 16, 35, 12, 530, DateTimeKind.Local).AddTicks(3869),
+                            ScheduledTime = new DateTime(2021, 7, 11, 16, 22, 2, 446, DateTimeKind.Local).AddTicks(3170),
                             Status = "ok",
                             Subcause = "bla",
                             Type = "bla",

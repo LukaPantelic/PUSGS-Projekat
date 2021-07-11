@@ -20,6 +20,8 @@ namespace WebApp.Repository
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
+
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Street>().HasData(
@@ -32,6 +34,36 @@ namespace WebApp.Repository
             modelBuilder.Entity<Incident>().HasData(
                 new Incident() { Id=1 , Type ="bla",Confirmed=true,Status="ok",ETA=DateTime.Now, ATA = DateTime.Now ,ETR = DateTime.Now ,AffectedCustomers=2,Voltage=220,ScheduledTime = DateTime.Now,Cause="bla",Subcause="bla",ConstructionType="bla",Material="bla"}
             );
+            modelBuilder.Entity<Crew>().HasData(
+                  new Crew() { Id = 3, Name = "Profesional" },
+                  new Crew() { Id = 2 , Name ="Programeri"},
+                  new Crew() { Id= 1,Name ="Drezga"}
+                  );
+           //   modelBuilder.Entity<IncidentDevice>().HasData(
+             //     new IncidentDevice() { Id=1, Device = data.Devices.FirstOrDefault(x => x.Name == "Bla"), Incident=data.Incidents.FirstOrDefault(x => x.Id == 1)}
+               //   );
+              modelBuilder.Entity<Consumer>().HasData(
+                  new Consumer() { Id =1, Name="Drezga", Phone="0600600606", Street=null, Surname="Dusanovac", Type="Commercial"}
+                  );
+              /*
+              modelBuilder.Entity<SafetyDocDevice>().HasData(
+                  new SafetyDocDevice() { Id=1, Device=data.Devices.FirstOrDefault(x => x.Name =="Bla"), SafetyDoc=data.SafetyDocs.FirstOrDefault(x => x.Id == 1)}
+                  );
+              modelBuilder.Entity<SafetyDoc>().HasData(
+                  new SafetyDoc() { Id=1, UserID="1", DateCreated=DateTime.Now, Details="bla", GroundingRemoved=false, Notes="la", Type="Something", OperationsCompleted=true, Ready=true, TagsRemoved=true, Status="2"}
+                  );*/
+
+            //  modelBuilder.Entity<WorkOrder>().HasData(
+            //     new WorkOrder() {  } );
+            //  modelBuilder.Entity<WorkOrderDevice>().HasData(
+            //    new WorkOrderDevice() { }
+            //     );
+            //  modelBuilder.Entity<WorkPlan>().HasData(
+            //     new WorkPlan() { }
+            //     );
+            //   modelBuilder.Entity<WorkPlanDevice>().HasData(
+            //      new WorkPlanDevice() {  }
+            //       );
             base.OnModelCreating(modelBuilder);
         }
 

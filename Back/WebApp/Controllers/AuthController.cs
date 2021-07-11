@@ -143,7 +143,15 @@ namespace WebApp.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetProfile()
         {
+            UserDTO bla = null;
             User temp = await _userManager.FindByIdAsync(User.Claims.First(x => x.Type == "UserID").Value);
+            foreach (var i in data.Streets)
+            {
+                if(i.Id==temp.StreetID)
+                {
+                    bla.Street = i.Name;
+                }
+            }
             UserDTO retval = new UserDTO()
             {
                 FullName = temp.FullName,
@@ -151,9 +159,9 @@ namespace WebApp.Controllers
                 Role = temp.Role,
                 Email = temp.Email,
                 CrewID = temp.CrewID,
-                Street = (await data.Streets.FirstOrDefaultAsync(x => x.Id == temp.StreetID)).Name,
-                DOB = temp.DOB,
-
+                Street = bla.Street,
+                //Street = (await data.Streets.FirstOrDefaultAsync(x => x.Id == temp.StreetID)).Name,
+                DOB = temp.DOB
             };
             return Ok(new { retval });
         }
@@ -163,14 +171,23 @@ namespace WebApp.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> EditProfile(EditProfileDTO model)
         {
+            int blaa = 0;
             string id = User.Claims.First(x => x.Type == "UserID").Value;
             User temp = await _userManager.FindByIdAsync(id);
+            foreach (var i in data.Streets)
+            {
+                if (i.Name == model.body.Street)
+                {
+                    blaa = i.Id;
+                }
+            }
             temp.FullName = model.body.FullName;
             temp.UserName = model.body.Username;
             temp.Role = model.body.Role;
             temp.Email = model.body.Email;
             temp.CrewID = model.body.CrewID;
-            temp.StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.body.Street)).Id;
+            //temp.StreetID = (await data.Streets.FirstOrDefaultAsync(x => x.Name == model.body.Street)).Id;
+            temp.StreetID = blaa;
             temp.DOB = model.body.DOB;
             await _userManager.UpdateAsync(temp);
             if (!string.IsNullOrWhiteSpace(model.body.Password))
