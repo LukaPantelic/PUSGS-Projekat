@@ -154,3 +154,4 @@ C:\Users\laptop\Desktop\web2\PUSGS-Projekat\Back\WebApp\obj\Debug\net5.0\WebApp.
 C:\Users\laptop\Desktop\web2\PUSGS-Projekat\Back\WebApp\obj\Debug\net5.0\WebApp.csprojAssemblyReference.cache
 C:\Users\laptop\Desktop\web2\PUSGS-Projekat\Back\WebApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
 C:\Users\laptop\Desktop\web2\PUSGS-Projekat\Back\WebApp\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Luka\Desktop\fakultet\PUSGS\PUSGS-Projekat\Back\WebApp\obj\Debug\net5.0\WebApp.pdb
