@@ -15,7 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.css']
 })
-export class CallsComponent implements AfterViewInit {
+export class CallsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'Reason', 'Hazard', 'Streets', 'User'];
   dataSource!: MatTableDataSource<Incident>;
